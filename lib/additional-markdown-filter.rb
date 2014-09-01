@@ -1,12 +1,29 @@
 require "html/pipeline"
 
 class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
- def initialize(text, context = nil, result = nil)
+
+  AMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
+
+  def initialize(text, context = nil, result = nil)
+    if defined?(Jekyll) && context[:amf_use_blocks]
+      require 'jekyll-override'
+    end
+
+    if context[:amf_use_blocks]
+      text = self.class.convert_curly_to_bracket(text)
+    end
+
     # do preprocessing, then call HTML::Pipeline::Markdown
     format_command_line!    text
     format_helper!          text
 
     super text, context, result
+  end
+
+  def self.convert_curly_to_bracket(text)
+    text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
+    text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+    text
   end
 
   def call
@@ -18,6 +35,14 @@ class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
     format_admonition!      html
 
     html
+  end
+
+  def front_wrap
+    @front_wrap ||= (context[:amf_use_blocks] != nil) ? "\\[\\[" : "\{\{"
+  end
+
+  def end_wrap
+    @end_wrap  ||= (context[:amf_use_blocks] != nil) ? "\\]\\]" : "\}\}"
   end
 
   def format_command_line!(text)
@@ -50,20 +75,22 @@ class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
   end
 
   def format_intro!(html)
-    html.gsub!(/<p>{{#intro}}<\/p>/,    '<div class="intro">')
-    html.gsub!(/<p>{{\/intro}}<\/p>/,   '</div>')
+    html.gsub!(/<p>#{front_wrap}\s*#intro\s*#{end_wrap}<\/p>/,    '<div class="intro">')
+    html.gsub!(/<p>#{front_wrap}\s*\/intro\s*#{end_wrap}<\/p>/,   '</div>')
   end
 
   def format_os_blocks!(html)
-    html.gsub!(/<p>{{#mac}}<\/p>/,     '<div class="platform-mac">')
-    html.gsub!(/<p>{{#windows}}<\/p>/, '<div class="platform-windows">')
-    html.gsub!(/<p>{{#linux}}<\/p>/,   '<div class="platform-linux">')
-    html.gsub!(/<p>{{#all}}<\/p>/,     '<div class="platform-all">')
-    html.gsub!(/<p>{{\/(mac|windows|linux|all)}}<\/p>/, '</div>')
+    html.gsub!(/<p>#{front_wrap}\s*#mac\s*#{end_wrap}<\/p>/,     '<div class="platform-mac">')
+    html.gsub!(/<p>#{front_wrap}\s*#windows\s*#{end_wrap}<\/p>/, '<div class="platform-windows">')
+    html.gsub!(/<p>#{front_wrap}\s*#linux\s*#{end_wrap}<\/p>/,   '<div class="platform-linux">')
+    html.gsub!(/<p>#{front_wrap}\s*#all\s*#{end_wrap}<\/p>/,     '<div class="platform-all">')
+    html.gsub!(/<p>#{front_wrap}\s*\/(mac|windows|linux|all)\s*#{end_wrap}<\/p>/, '</div>')
   end
 
   def format_admonition!(html)
-    html.gsub!(/<p>{{#(tip|warning|error)}}<\/p>/,  '<div class="alert \1">')
-    html.gsub!(/<p>{{\/(tip|warning|error)}}<\/p>/, '</div>')
+    html.gsub!(/<p>#{front_wrap}\s*#tip\s*#{end_wrap}<\/p>/,     '<div class="alert tip">')
+    html.gsub!(/<p>#{front_wrap}\s*#warning\s*#{end_wrap}<\/p>/, '<div class="alert warning">')
+    html.gsub!(/<p>#{front_wrap}\s*#error\s*#{end_wrap}<\/p>/,   '<div class="alert error">')
+    html.gsub!(/<p>#{front_wrap}\s*\/(tip|warning|error)\s*#{end_wrap}<\/p>/, '</div>')
   end
 end

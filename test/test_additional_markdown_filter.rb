@@ -34,8 +34,16 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
     assert_equal 1, doc.css('a').size # the inner Markdown converted!
   end
 
-  def test_intro
-    doc = AdditionalMarkdownFilter.to_document(fixture("intro.md"), {})
+  def test_block_intro
+    doc = AdditionalMarkdownFilter.to_document(fixture("block_intro.md"), {:amf_use_blocks => true})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('div.intro').size
+    assert_equal 1, doc.css('a').size # the inner Markdown converted!
+  end
+
+  def test_intro_conversion
+    doc = AdditionalMarkdownFilter.to_document(fixture("intro.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -56,8 +64,60 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
     assert_equal 1, doc.css('em').size
   end
 
+  def test_block_os_blocks
+    doc = AdditionalMarkdownFilter.to_document(fixture("block_os_blocks.md"), {:amf_use_blocks => true})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('div.platform-mac').size
+    assert_equal 1, doc.css('div.platform-windows').size
+    assert_equal 1, doc.css('div.platform-linux').size
+    assert_equal 1, doc.css('div.platform-all').size
+    # the inner Markdown converted!
+    assert_equal 3, doc.css('ol').size
+    assert_equal 2, doc.css('a').size
+    assert_equal 1, doc.css('em').size
+  end
+
+  def test_block_conversion
+    doc = AdditionalMarkdownFilter.to_document(fixture("os_blocks.md"), {:amf_use_blocks => true})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('div.platform-mac').size
+    assert_equal 1, doc.css('div.platform-windows').size
+    assert_equal 1, doc.css('div.platform-linux').size
+    assert_equal 1, doc.css('div.platform-all').size
+    # the inner Markdown converted!
+    assert_equal 3, doc.css('ol').size
+    assert_equal 2, doc.css('a').size
+    assert_equal 1, doc.css('em').size
+  end
+
   def test_admonition
     doc = AdditionalMarkdownFilter.to_document(fixture("admonition.md"), {})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.warning').size
+    assert_equal 1, doc.css('div.error').size
+    # the inner Markdown converted!
+    assert_equal 1, doc.css('strong').size
+    assert_equal 1, doc.css('del').size
+  end
+
+  def test_block_admonition
+    doc = AdditionalMarkdownFilter.to_document(fixture("block_admonition.md"), {:amf_use_blocks => true})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.warning').size
+    assert_equal 1, doc.css('div.error').size
+    # the inner Markdown converted!
+    assert_equal 1, doc.css('strong').size
+    assert_equal 1, doc.css('del').size
+  end
+
+  def test_admonition_conversion
+    doc = AdditionalMarkdownFilter.to_document(fixture("admonition.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
