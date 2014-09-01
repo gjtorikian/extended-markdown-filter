@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "additional-markdown-filter"
-  spec.version       = "0.1.1"
+  spec.version       = "0.2.0"
   spec.authors       = ["Garen Torikian"]
   spec.email         = ["gjtorikian@gmail.com"]
   spec.summary       = %q{Add additional markup syntax to the HTML::Pipeline}
