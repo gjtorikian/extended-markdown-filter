@@ -3,6 +3,8 @@ additional-markdown-filter
 
 Additional Markdown filters for the [HTML::Pipeline](https://github.com/jch/html-pipeline).
 
+[![Build Status](https://travis-ci.org/gjtorikian/additional-markdown-filter.svg)](https://travis-ci.org/gjtorikian/additional-markdown-filter)
+
 ## Installation
 
 Add this line to your application's Gemfile:
