@@ -1,11 +1,16 @@
 require "html/pipeline"
 
 class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
+
   AMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
- def initialize(text, context = nil, result = nil)
+
+  def initialize(text, context = nil, result = nil)
+    if defined?(Jekyll) && context[:amf_use_blocks]
+      require 'jekyll-override'
+    end
+
     if context[:amf_use_blocks]
-      text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
-      text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+      text = self.class.convert_curly_to_bracket(text)
     end
 
     # do preprocessing, then call HTML::Pipeline::Markdown
@@ -13,6 +18,12 @@ class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
     format_helper!          text
 
     super text, context, result
+  end
+
+  def self.convert_curly_to_bracket(text)
+    text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
+    text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+    text
   end
 
   def call
