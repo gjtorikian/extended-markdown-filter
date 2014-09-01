@@ -1,7 +1,13 @@
 require "html/pipeline"
 
 class AdditionalMarkdownFilter < HTML::Pipeline::MarkdownFilter
+  AMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
  def initialize(text, context = nil, result = nil)
+    if context[:amf_use_blocks]
+      text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
+      text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+    end
+
     # do preprocessing, then call HTML::Pipeline::Markdown
     format_command_line!    text
     format_helper!          text
