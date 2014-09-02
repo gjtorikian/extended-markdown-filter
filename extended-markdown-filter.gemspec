@@ -1,9 +1,9 @@
 Gem::Specification.new do |spec|
-  spec.name          = "additional-markdown-filter"
+  spec.name          = "extended-markdown-filter"
   spec.version       = "0.2.0"
   spec.authors       = ["Garen Torikian"]
   spec.email         = ["gjtorikian@gmail.com"]
-  spec.summary       = %q{Add additional markup syntax to the HTML::Pipeline}
+  spec.summary       = %q{Add extended markup syntax to the HTML::Pipeline}
   spec.description   = %q{This is a custom Markdown processor to be used with GitHub's HTML::Pipeline. }
   spec.homepage      = ""
   spec.license       = "MIT"

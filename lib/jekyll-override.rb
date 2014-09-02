@@ -7,7 +7,7 @@ module Jekyll
 
     define_method(:render) do |layouts, site_payload|
       unless self.content.nil?
-        self.content = AdditionalMarkdownFilter.convert_curly_to_bracket(self.content)
+        self.content = ExtendedMarkdownFilter.convert_curly_to_bracket(self.content)
       end
       old_render.bind(self).call(layouts, site_payload)
     end

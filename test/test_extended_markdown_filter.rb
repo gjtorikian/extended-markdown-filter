@@ -1,12 +1,12 @@
 require "test_helper"
 
-class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
+class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   def fixture(name)
     File.open(File.join("#{File.expand_path(File.dirname(__FILE__))}", "fixtures", name)).read
   end
 
   def test_command_line
-    doc = AdditionalMarkdownFilter.to_document(fixture("command_line.md"), {})
+    doc = ExtendedMarkdownFilter.to_document(fixture("command_line.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('pre').size
@@ -17,7 +17,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_helper
-    doc = AdditionalMarkdownFilter.to_document(fixture("helper.md"), {})
+    doc = ExtendedMarkdownFilter.to_document(fixture("helper.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.helper').size
@@ -27,7 +27,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_intro
-    doc = AdditionalMarkdownFilter.to_document(fixture("intro.md"), {})
+    doc = ExtendedMarkdownFilter.to_document(fixture("intro.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -35,7 +35,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_intro
-    doc = AdditionalMarkdownFilter.to_document(fixture("block_intro.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_intro.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -43,7 +43,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_intro_conversion
-    doc = AdditionalMarkdownFilter.to_document(fixture("intro.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("intro.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -51,7 +51,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_os_blocks
-    doc = AdditionalMarkdownFilter.to_document(fixture("os_blocks.md"), {})
+    doc = ExtendedMarkdownFilter.to_document(fixture("os_blocks.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.platform-mac').size
@@ -65,7 +65,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_os_blocks
-    doc = AdditionalMarkdownFilter.to_document(fixture("block_os_blocks.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_os_blocks.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.platform-mac').size
@@ -79,7 +79,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_conversion
-    doc = AdditionalMarkdownFilter.to_document(fixture("os_blocks.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("os_blocks.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.platform-mac').size
@@ -93,7 +93,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_admonition
-    doc = AdditionalMarkdownFilter.to_document(fixture("admonition.md"), {})
+    doc = ExtendedMarkdownFilter.to_document(fixture("admonition.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
@@ -105,7 +105,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_admonition
-    doc = AdditionalMarkdownFilter.to_document(fixture("block_admonition.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_admonition.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
@@ -117,7 +117,7 @@ class HTML::Pipeline::AdditionalMarkdownFilterTest < Minitest::Test
   end
 
   def test_admonition_conversion
-    doc = AdditionalMarkdownFilter.to_document(fixture("admonition.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("admonition.md"), {:amf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
