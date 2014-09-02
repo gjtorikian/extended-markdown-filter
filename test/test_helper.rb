@@ -2,4 +2,4 @@ require "rubygems"
 
 require 'minitest/autorun'
 
-require "additional-markdown-filter"
+require "extended-markdown-filter"

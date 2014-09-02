@@ -1,15 +1,15 @@
-additional-markdown-filter
+extended-markdown-filter
 ====================
 
-Additional Markdown filters for the [HTML::Pipeline](https://github.com/jch/html-pipeline).
+Extended Markdown filters for the [HTML::Pipeline](https://github.com/jch/html-pipeline).
 
-[![Build Status](https://travis-ci.org/gjtorikian/additional-markdown-filter.svg)](https://travis-ci.org/gjtorikian/additional-markdown-filter)
+[![Build Status](https://travis-ci.org/gjtorikian/extended-markdown-filter.svg)](https://travis-ci.org/gjtorikian/extended-markdown-filter)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'additional-markdown-filter'
+    gem 'extended-markdown-filter'
 
 And then execute:
 
@@ -17,14 +17,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install additional-markdown-filter
+    $ gem install extended-markdown-filter
 
 ## Usage
 
 The simplest way to do this is
 
 ``` ruby
-require 'additional-markdown-filter'
+require 'extended-markdown-filter'
 ```
 
 Then just use the HTML pipeline normally.
