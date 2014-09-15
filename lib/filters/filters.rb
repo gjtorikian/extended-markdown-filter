@@ -20,4 +20,8 @@ module Filters
   end
   module_function :end_wrap
 
+  def wrap_symbol
+    (context[:amf_use_blocks] == true) ? "\\]" : "}"
+  end
+  module_function :wrap_symbol
 end
