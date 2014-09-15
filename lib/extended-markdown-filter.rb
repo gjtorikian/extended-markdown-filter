@@ -13,14 +13,14 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   include Filters::PreFilter
   include Filters::PostFilter
 
-  AMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
+  EMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
 
   def initialize(text, context = nil, result = nil)
-    if defined?(Jekyll) && context[:amf_use_blocks]
+    if defined?(Jekyll) && context[:emf_use_blocks]
       require 'jekyll-override'
     end
 
-    if context[:amf_use_blocks]
+    if context[:emf_use_blocks]
       text = self.class.convert_curly_to_bracket(text)
     end
 
@@ -34,8 +34,8 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   end
 
   def self.convert_curly_to_bracket(text)
-    text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
-    text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+    text = text.gsub(/\{\{\s*#(#{EMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
+    text = text.gsub(/\{\{\s*\/(#{EMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
     text = text.gsub(/\{\{\s*(octicon-\S+\s*[^\}]+)\s*\}\}/,  '[[\1]]')
 
     text

@@ -33,4 +33,4 @@ Then just use the HTML pipeline normally.
 
 Because of the Liquid template engine, if you use this filter with Jekyll, you might find that your curly brace tags--such as `{{#tip}}`--disappear.
 
-You'll need to pass the context `amf_use_blocks` through your filter. This sets up a totally safe monkey-patch to convert the `{{ }}` blocks into `[[ ]]`, so that Liquid ignores them. Then, this renderer will convert the Markdown appropriately.
+You'll need to pass the context `emf_use_blocks` through your filter. This sets up a totally safe monkey-patch to convert the `{{ }}` blocks into `[[ ]]`, so that Liquid ignores them. Then, this renderer will convert the Markdown appropriately.

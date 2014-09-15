@@ -11,17 +11,17 @@ module Filters
   module_function :context=
 
   def front_wrap
-    (context[:amf_use_blocks] == true) ? "\\[\\[" : "\{\{"
+    (context[:emf_use_blocks] == true) ? "\\[\\[" : "\{\{"
   end
   module_function :front_wrap
 
   def end_wrap
-    (context[:amf_use_blocks] == true) ? "\\]\\]" : "\}\}"
+    (context[:emf_use_blocks] == true) ? "\\]\\]" : "\}\}"
   end
   module_function :end_wrap
 
   def wrap_symbol
-    (context[:amf_use_blocks] == true) ? "\\]" : "}"
+    (context[:emf_use_blocks] == true) ? "\\]" : "}"
   end
   module_function :wrap_symbol
 end

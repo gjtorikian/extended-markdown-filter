@@ -35,7 +35,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_intro
-    doc = ExtendedMarkdownFilter.to_document(fixture("block_intro.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_intro.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -43,7 +43,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_intro_conversion
-    doc = ExtendedMarkdownFilter.to_document(fixture("intro.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("intro.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.intro').size
@@ -65,7 +65,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_os_blocks
-    doc = ExtendedMarkdownFilter.to_document(fixture("block_os_blocks.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_os_blocks.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.platform-mac').size
@@ -79,7 +79,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_conversion
-    doc = ExtendedMarkdownFilter.to_document(fixture("os_blocks.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("os_blocks.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.platform-mac').size
@@ -105,7 +105,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_admonition
-    doc = ExtendedMarkdownFilter.to_document(fixture("block_admonition.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_admonition.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
@@ -117,7 +117,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_admonition_conversion
-    doc = ExtendedMarkdownFilter.to_document(fixture("admonition.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("admonition.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
@@ -138,7 +138,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_block_octicon
-    doc = ExtendedMarkdownFilter.to_document(fixture("block_octicon.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("block_octicon.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('span.cat').size
@@ -147,7 +147,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
   end
 
   def test_oction_conversion
-    doc = ExtendedMarkdownFilter.to_document(fixture("octicon.md"), {:amf_use_blocks => true})
+    doc = ExtendedMarkdownFilter.to_document(fixture("octicon.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('span.cat').size
