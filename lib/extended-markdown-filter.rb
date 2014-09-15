@@ -36,6 +36,8 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   def self.convert_curly_to_bracket(text)
     text = text.gsub(/\{\{\s*#(#{AMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
     text = text.gsub(/\{\{\s*\/(#{AMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
+    text = text.gsub(/\{\{\s*(octicon-\S+\s*[^\}]+)\s*\}\}/,  '[[\1]]')
+
     text
   end
 
@@ -45,7 +47,8 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
 
     format_intro!           html
     format_os_blocks!       html
-    format_admonition!      html
+    format_admonitions!     html
+    format_octicons!        html
 
     html
   end
