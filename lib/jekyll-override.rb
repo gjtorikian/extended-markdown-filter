@@ -6,7 +6,8 @@ module Jekyll
     alias_method :old_run, :run
 
     def run
-      if ENV['OVERRIDE_JEKYLL_RENDER'] == "true"
+      html_pipeline_context = site.site_payload["site"]["html_pipeline"] && site.site_payload["site"]["html_pipeline"]["context"]
+      if site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks]
         document.content = ExtendedMarkdownFilter.convert_curly_to_bracket(document.content)
       end
       old_run
