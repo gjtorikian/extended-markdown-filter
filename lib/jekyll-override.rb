@@ -1,15 +1,15 @@
 # Liquid disregards tags it doesn't know,
 # so rather than define a new format for additions like {{#tip}},
-# we'll convert them to block form
+# we'll convert them to bracket form
 module Jekyll
-  class Page
-    old_render = self.instance_method(:render)
+  class Renderer
+    alias_method :old_run, :run
 
-    define_method(:render) do |layouts, site_payload|
-      unless self.content.nil?
-        self.content = ExtendedMarkdownFilter.convert_curly_to_bracket(self.content)
+    def run
+      if ENV['OVERRIDE_JEKYLL_RENDER'] == "true"
+        document.content = ExtendedMarkdownFilter.convert_curly_to_bracket(document.content)
       end
-      old_render.bind(self).call(layouts, site_payload)
+      old_run
     end
   end
 end

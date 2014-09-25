@@ -17,6 +17,7 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
 
   def initialize(text, context = nil, result = nil)
     if defined?(Jekyll) && context[:emf_use_blocks]
+      ENV['OVERRIDE_JEKYLL_RENDER'] = "true"
       require 'jekyll-override'
     end
 
