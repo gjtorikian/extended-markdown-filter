@@ -1,11 +1,11 @@
 require 'html/pipeline'
 require 'filters/filters'
 
-Dir[File.join("#{File.expand_path(File.dirname(__FILE__))}", "filters", "pre", "*.rb")].each do |file|
+Dir[File.join(File.expand_path(File.dirname(__FILE__)), "filters", "pre", "*.rb")].each do |file|
   require file
 end
 
-Dir[File.join("#{File.expand_path(File.dirname(__FILE__))}", "filters", "post", "*.rb")].each do |file|
+Dir[File.join(File.expand_path(File.dirname(__FILE__)), "filters", "post", "*.rb")].each do |file|
   require file
 end
 
