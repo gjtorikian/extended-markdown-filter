@@ -132,27 +132,27 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     doc = ExtendedMarkdownFilter.to_document(fixture("octicon.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('span.cat').size
+    assert_equal 1, doc.css('span.octicon-cat').size
     assert_match "{{ octicon dog", doc.to_s
-    assert_match '<p><a href="http://alink.com">Click <span class="octicon gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
+    assert_match '<p><a href="http://alink.com">Click <span class="octicon octicon-gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
   end
 
   def test_block_octicon
     doc = ExtendedMarkdownFilter.to_document(fixture("block_octicon.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('span.cat').size
+    assert_equal 1, doc.css('span.octicon-cat').size
     assert_match "[[ octicon dog", doc.to_s
-    assert_match '<p><a href="http://alink.com">Click <span class="octicon gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
+    assert_match '<p><a href="http://alink.com">Click <span class="octicon octicon-gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
   end
 
   def test_oction_conversion
     doc = ExtendedMarkdownFilter.to_document(fixture("octicon.md"), {:emf_use_blocks => true})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('span.cat').size
+    assert_equal 1, doc.css('span.octicon-cat').size
     assert_match "{{ octicon dog", doc.to_s
-    assert_match '<p><a href="http://alink.com">Click <span class="octicon gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
+    assert_match '<p><a href="http://alink.com">Click <span class="octicon octicon-gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
   end
 
 end
