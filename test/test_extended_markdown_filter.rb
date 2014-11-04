@@ -14,6 +14,11 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert_equal 1, doc.css('span.comment').size
     assert_equal 2, doc.css('em').size
     assert_equal 1, doc.css('span.output').size
+
+    doc = ExtendedMarkdownFilter.to_document(fixture("command_line_list.md"), {})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 2, doc.css('li pre.command-line').size
   end
 
   def test_helper
