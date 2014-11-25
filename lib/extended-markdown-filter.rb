@@ -35,11 +35,17 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   end
 
   def self.convert_curly_to_bracket(text)
+    return text if text.nil?
     text = text.gsub(/\{\{\s*#(#{EMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
     text = text.gsub(/\{\{\s*\/(#{EMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
     text = text.gsub(/\{\{\s*(octicon-\S+\s*[^\}]+)\s*\}\}/,  '[[\1]]')
 
     text
+  end
+
+  def self.should_jekyll_replace?(site)
+    html_pipeline_context = site.site_payload["site"]["html_pipeline"] && site.site_payload["site"]["html_pipeline"]["context"]
+    site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks]
   end
 
   def call
