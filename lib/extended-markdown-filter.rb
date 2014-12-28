@@ -1,6 +1,7 @@
 require 'html/pipeline'
 require 'filters/filters'
 require 'nokogiri'
+require 'jekyll-override' unless defined?(Jekyll).nil?
 
 Dir[File.join(File.expand_path(File.dirname(__FILE__)), "filters", "pre", "*.rb")].each do |file|
   require file
@@ -17,10 +18,6 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   EMF_CURLY_TAGS = %w(intro mac windows linux all tip warning error).join('|')
 
   def initialize(text, context = nil, result = nil)
-    if defined?(Jekyll) && context[:emf_use_blocks]
-      require 'jekyll-override'
-    end
-
     if context[:emf_use_blocks]
       text = self.class.convert_curly_to_bracket(text)
     end
@@ -45,7 +42,8 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
 
   def self.should_jekyll_replace?(site)
     html_pipeline_context = site.site_payload["site"]["html_pipeline"] && site.site_payload["site"]["html_pipeline"]["context"]
-    site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks]
+    pipeline_emf_context = site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks] || site.site_payload["site"]["html_pipeline"]["context"]["emf_use_blocks"]
+    site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && pipeline_emf_context
   end
 
   def call
