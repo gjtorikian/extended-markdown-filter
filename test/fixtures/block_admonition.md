@@ -19,9 +19,9 @@ Yo, check this out: line two
 
 [[/warning]]
 
-[[#error]]
+[[#danger]]
 
 Sheeeeit, this is a problem: ~~line one~~
 Sheeeeit, this is a problem: line two
 
-[[/error]]
+[[/danger]]
