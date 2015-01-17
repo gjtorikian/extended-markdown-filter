@@ -78,6 +78,13 @@ You can create separate, priority-colored callouts with `{{#tip}}`, `{{#warning}
     Here's a hot tip: line two
 
     {{/tip}}
+    
+    {{#note}}
+    
+    You should probably know this! line one
+    You should probably know this! line two
+    
+    {{/note}}
 
     {{#warning}}
 
