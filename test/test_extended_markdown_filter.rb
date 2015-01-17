@@ -111,6 +111,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.note').size
     assert_equal 1, doc.css('div.warning').size
     assert_equal 1, doc.css('div.error').size
     # the inner Markdown converted!
@@ -123,6 +124,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.note').size
     assert_equal 1, doc.css('div.warning').size
     assert_equal 1, doc.css('div.error').size
     # the inner Markdown converted!
