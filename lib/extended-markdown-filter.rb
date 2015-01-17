@@ -15,7 +15,7 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   include Filters::PreFilter
   include Filters::PostFilter
 
-  EMF_CURLY_TAGS = %w(intro mac windows linux all tip note warning error).join('|')
+  EMF_CURLY_TAGS = %w(intro mac windows linux all tip note warning danger).join('|')
 
   def initialize(text, context = nil, result = nil)
     if context[:emf_use_blocks]
