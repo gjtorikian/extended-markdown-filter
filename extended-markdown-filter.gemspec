@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "extended-markdown-filter"
-  spec.version       = "0.4.0"
+  spec.version       = "0.4.1"
   spec.authors       = ["Garen Torikian"]
   spec.email         = ["gjtorikian@gmail.com"]
   spec.summary       = %q{Add extended markup syntax to the HTML::Pipeline}
@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'html-pipeline', "~> 1.0"
+  spec.add_dependency 'html-pipeline', "~> 2.0"
   spec.add_dependency 'nokogiri', "~> 1.6.4"
 
   spec.add_development_dependency "bundler", "~> 1.4"
