@@ -25,8 +25,8 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
     Filters.context = context
 
     # do preprocessing, then call HTML::Pipeline::Markdown
-    format_command_line!    text
-    format_helper!          text
+    text = format_command_line    text
+    text = format_helper          text
 
     super text, context, result
   end

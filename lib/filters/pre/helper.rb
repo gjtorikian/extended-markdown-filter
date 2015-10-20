@@ -1,9 +1,9 @@
 module Filters
   module PreFilter
-    def format_helper!(text)
+    def format_helper(text)
       prefix = '<p'
 
-      text.gsub! /\n?``` helper(.+?)```/m do |block|
+      text.gsub /\n?``` helper(.+?)```/m do |block|
         block.gsub! /^``` helper\s*/, ''
         block.gsub! /^```$/, ''
 
