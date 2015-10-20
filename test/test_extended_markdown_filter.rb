@@ -99,8 +99,9 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.note').size
     assert_equal 1, doc.css('div.warning').size
-    assert_equal 1, doc.css('div.error').size
+    assert_equal 1, doc.css('div.danger').size
     # the inner Markdown converted!
     assert_equal 1, doc.css('strong').size
     assert_equal 1, doc.css('del').size
@@ -111,8 +112,9 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.note').size
     assert_equal 1, doc.css('div.warning').size
-    assert_equal 1, doc.css('div.error').size
+    assert_equal 1, doc.css('div.danger').size
     # the inner Markdown converted!
     assert_equal 1, doc.css('strong').size
     assert_equal 1, doc.css('del').size
@@ -123,8 +125,9 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.tip').size
+    assert_equal 1, doc.css('div.note').size
     assert_equal 1, doc.css('div.warning').size
-    assert_equal 1, doc.css('div.error').size
+    assert_equal 1, doc.css('div.danger').size
     # the inner Markdown converted!
     assert_equal 1, doc.css('strong').size
     assert_equal 1, doc.css('del').size
