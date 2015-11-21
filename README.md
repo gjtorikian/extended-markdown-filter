@@ -68,7 +68,7 @@ The `helper` notation wraps content in an [accordion fold](http://jqueryui.com/a
 
 ### Admonition blocks
 
-You can create separate, priority-colored callouts with `{{#tip}}`, `{{#warning}}`, and `{{#error}}` tags.
+You can create separate, priority-colored callouts with `{{#tip}}`, `{{#note}}`, `{{#warning}}`, and `{{#error}}` tags.
 
 #### Example
 
