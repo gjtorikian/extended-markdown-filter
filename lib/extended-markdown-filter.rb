@@ -55,12 +55,7 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
     format_admonitions!     html
     format_octicons!        html
 
-    doc = Nokogiri::HTML(html)
-    doc.css(".command-line a").each do |node|
-      node.replace Nokogiri::XML::Text.new(node.text, node.document)
-    end
-
-    doc.to_s
+    html
   end
 
 end
