@@ -4,7 +4,7 @@ module Filters
       prefix = '<p'
 
       text.gsub /\n?``` helper(.+?)```/m do |block|
-        block.gsub! /^``` helper\s*/, ''
+        block.gsub! /^``` helper/, ''
         block.gsub! /^```$/, ''
 
         header = ''

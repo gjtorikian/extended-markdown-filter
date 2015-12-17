@@ -1,8 +1,11 @@
 module Filters
   module PostFilter
+    INTRO_HTML = '<div class="intro">'
+    CLOSE_DIV = '</div>'
+
     def format_intro!(html)
-      html.gsub!(/<p>#{Filters.front_wrap}\s*#intro\s*#{Filters.end_wrap}<\/p>/,    '<div class="intro">')
-      html.gsub!(/<p>#{Filters.front_wrap}\s*\/intro\s*#{Filters.end_wrap}<\/p>/,   '</div>')
+      html.gsub!(/<p>#{@front_wrap}#intro#{@end_wrap}<\/p>/,    INTRO_HTML)
+      html.gsub!(/<p>#{@front_wrap}\/intro#{@end_wrap}<\/p>/,   CLOSE_DIV)
     end
   end
 end

@@ -1,4 +1,4 @@
-[[ octicon-cat This is a cat]]
+[[ octicon-cat This is a cat ]]
 
 [[ octicon dog This is nothing. ]]
 

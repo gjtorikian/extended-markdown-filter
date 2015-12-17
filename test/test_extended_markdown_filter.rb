@@ -157,7 +157,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
 
     assert_equal 1, doc.css('span.octicon-cat').size
     assert_match "{{ octicon dog", doc.to_s
-    assert_match '<p><a href="http://alink.com">Click <span class="octicon octicon-gear" aria-label="Settings " title="Settings "></span></a></p>', doc.to_s
+    assert_match '<p><a href="http://alink.com">Click <span class="octicon octicon-gear" aria-label="Settings" title="Settings"></span></a></p>', doc.to_s
   end
 
 end

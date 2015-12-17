@@ -1,5 +1,4 @@
 require 'html/pipeline'
-require 'filters/filters'
 require 'nokogiri'
 require 'jekyll-override' unless defined?(Jekyll).nil?
 
@@ -20,9 +19,14 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   def initialize(text, context = nil, result = nil)
     if context[:emf_use_blocks]
       text = self.class.convert_curly_to_bracket(text)
+      @front_wrap = "\\[\\["
+      @end_wrap = "\\]\\]"
+      @wrap_symbol = "\\]"
+    else
+      @front_wrap = "\{\{"
+      @end_wrap = "\}\}"
+      @wrap_symbol = "}"
     end
-
-    Filters.context = context
 
     # do preprocessing, then call HTML::Pipeline::Markdown
     text = format_command_line    text
@@ -33,9 +37,9 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
 
   def self.convert_curly_to_bracket(text)
     return text if text.nil?
-    text = text.gsub(/\{\{\s*#(#{EMF_CURLY_TAGS})\s*\}\}/, '[[#\1]]')
-    text = text.gsub(/\{\{\s*\/(#{EMF_CURLY_TAGS})\s*\}\}/, '[[/\1]]')
-    text = text.gsub(/\{\{\s*(octicon-\S+\s*[^\}]+)\s*\}\}/,  '[[\1]]')
+    text = text.gsub(/\{\{#(#{EMF_CURLY_TAGS})\}\}/, '[[#\1]]')
+    text = text.gsub(/\{\{\/(#{EMF_CURLY_TAGS})\}\}/, '[[/\1]]')
+    text = text.gsub(/\{\{ (octicon-\S+\s*[^\}]+) \}\}/,  '[[\1]]')
 
     text
   end
