@@ -1,14 +1,7 @@
 require 'html/pipeline'
+require 'filters/filters'
 require 'nokogiri'
 require 'jekyll-override' unless defined?(Jekyll).nil?
-
-Dir[File.join(File.expand_path(File.dirname(__FILE__)), "filters", "pre", "*.rb")].each do |file|
-  require file
-end
-
-Dir[File.join(File.expand_path(File.dirname(__FILE__)), "filters", "post", "*.rb")].each do |file|
-  require file
-end
 
 class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   include Filters::PreFilter
