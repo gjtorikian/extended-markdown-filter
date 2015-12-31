@@ -1,5 +1,4 @@
-extended-markdown-filter
-====================
+# extended-markdown-filter
 
 Extended Markdown filters for the [HTML::Pipeline](https://github.com/jch/html-pipeline).
 
@@ -27,7 +26,21 @@ The simplest way to do this is
 require 'extended-markdown-filter'
 ```
 
-Then just use the HTML pipeline normally.
+Then just use the HTML pipeline normally. With Jekyll, this is meant to be used with another plugin in conjunction, https://github.com/gjtorikian/jekyll-html-pipeline.
+
+A minimum config file might look like:
+``` yaml
+gems:
+  - extended-markdown-filter
+  - jekyll-html-pipeline
+
+markdown: HTMLPipeline
+html_pipeline:
+  filters:
+    - "ExtendedMarkdownFilter"
+  context:
+    emf_use_blocks: true
+```
 
 ### Within Jekyll
 
@@ -78,12 +91,12 @@ You can create separate, priority-colored callouts with `{{#tip}}`, `{{#note}}`,
     Here's a hot tip: line two
 
     {{/tip}}
-    
+
     {{#note}}
-    
+
     You should probably know this! line one
     You should probably know this! line two
-    
+
     {{/note}}
 
     {{#warning}}
