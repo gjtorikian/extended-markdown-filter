@@ -16,6 +16,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert_equal 1, doc.css('span.output').size
 
     assert_equal 0, doc.css('.command-line a').size
+    refute_equal 0, doc.css('pre').inner_text.length
   end
 
   def test_command_line_indented
@@ -29,6 +30,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert_equal 1, doc.css('span.output').size
 
     assert_equal 0, doc.css('.command-line a').size
+    refute_equal 0, doc.css('pre').inner_text.length
   end
 
   def test_helper
