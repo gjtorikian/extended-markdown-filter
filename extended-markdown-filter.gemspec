@@ -19,5 +19,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.4"
   spec.add_development_dependency "rake"
   spec.add_development_dependency 'minitest', "~> 5.0"
-  spec.add_development_dependency 'github-markdown', "~> 0.6"
+  spec.add_development_dependency 'commonmarker', '~> 0.16.8'
 end
