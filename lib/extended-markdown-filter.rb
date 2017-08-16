@@ -1,6 +1,5 @@
 require 'html/pipeline'
 require 'filters/filters'
-require 'nokogiri'
 require 'jekyll-override' unless defined?(Jekyll).nil?
 
 class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
