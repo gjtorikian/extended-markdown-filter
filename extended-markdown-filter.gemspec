@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "extended-markdown-filter"
-  spec.version       = "0.5.0"
+  spec.version       = "0.5.1"
   spec.authors       = ["Garen Torikian"]
   spec.email         = ["gjtorikian@gmail.com"]
   spec.summary       = %q{Add extended markup syntax to the HTML::Pipeline}
