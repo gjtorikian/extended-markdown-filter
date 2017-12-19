@@ -38,6 +38,7 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
 
   def self.should_jekyll_replace?(site)
     html_pipeline_context = site.site_payload["site"]["html_pipeline"] && site.site_payload["site"]["html_pipeline"]["context"]
+    return false if html_pipeline_context.nil?
     pipeline_emf_context = site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks] || site.site_payload["site"]["html_pipeline"]["context"]["emf_use_blocks"]
     site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && pipeline_emf_context
   end
