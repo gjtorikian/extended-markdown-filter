@@ -33,6 +33,26 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     refute_equal 0, doc.css('pre').inner_text.length
   end
 
+  def test_nested_command_line
+    doc = ExtendedMarkdownFilter.to_document(fixture("command_line_nested.md"), {})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('ol').size
+    assert_equal 2, doc.css('li').size
+    assert_equal 2, doc.css('pre').size
+
+    list = doc.css('ol')[0]
+    first_list_item = doc.css('li')[0]
+    first_command_line_block = doc.css('pre')[0]
+    second_list_item = doc.css('li')[1]
+    second_command_line_block = doc.css('pre')[1]
+
+    assert list.children.include?(first_list_item)
+    assert list.children.include?(second_list_item)
+    assert_equal first_command_line_block.parent, first_list_item
+    assert_equal second_command_line_block.parent, second_list_item
+  end
+
   def test_helper
     doc = ExtendedMarkdownFilter.to_document(fixture("helper.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
