@@ -21,7 +21,6 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
     end
 
     # do preprocessing, then call HTML::Pipeline::Markdown
-    text = format_command_line    text
     text = format_helper          text
 
     super text, context, result
@@ -51,6 +50,7 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
     format_os_blocks!       html
     format_admonitions!     html
     format_octicons!        html
+    format_command_line!    html
 
     html
   end

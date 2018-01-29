@@ -9,13 +9,15 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     doc = ExtendedMarkdownFilter.to_document(fixture("command_line.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('pre').size
+    assert_equal 1, doc.css('pre.command-line').size
     assert_equal 2, doc.css('span.command').size
     assert_equal 1, doc.css('span.comment').size
     assert_equal 2, doc.css('em').size
     assert_equal 1, doc.css('span.output').size
+    assert_equal 0, doc.css('code').size
 
     assert_equal 0, doc.css('.command-line a').size
+    assert_equal 8, doc.to_html.lines.count
     refute_equal 0, doc.css('pre').inner_text.length
   end
 
@@ -23,7 +25,7 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     doc = ExtendedMarkdownFilter.to_document(fixture("command_line_indented.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('pre').size
+    assert_equal 1, doc.css('pre.command-line').size
     assert_equal 2, doc.css('span.command').size
     assert_equal 1, doc.css('span.comment').size
     assert_equal 2, doc.css('em').size
