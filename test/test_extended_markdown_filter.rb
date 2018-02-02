@@ -9,7 +9,23 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     doc = ExtendedMarkdownFilter.to_document(fixture("command_line.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('pre').size
+    assert_equal 1, doc.css('pre.command-line').size
+    assert_equal 2, doc.css('span.command').size
+    assert_equal 1, doc.css('span.comment').size
+    assert_equal 2, doc.css('em').size
+    assert_equal 1, doc.css('span.output').size
+    assert_equal 0, doc.css('code').size
+
+    assert_equal 0, doc.css('.command-line a').size
+    assert_equal 8, doc.to_html.lines.count
+    refute_equal 0, doc.css('pre').inner_text.length
+  end
+
+  def test_command_line_indented
+    doc = ExtendedMarkdownFilter.to_document(fixture("command_line_indented.md"), {})
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 1, doc.css('pre.command-line').size
     assert_equal 2, doc.css('span.command').size
     assert_equal 1, doc.css('span.comment').size
     assert_equal 2, doc.css('em').size
@@ -19,18 +35,24 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     refute_equal 0, doc.css('pre').inner_text.length
   end
 
-  def test_command_line_indented
-    doc = ExtendedMarkdownFilter.to_document(fixture("command_line_indented.md"), {})
+  def test_nested_command_line
+    doc = ExtendedMarkdownFilter.to_document(fixture("command_line_nested.md"), {})
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
-    assert_equal 1, doc.css('pre').size
-    assert_equal 2, doc.css('span.command').size
-    assert_equal 1, doc.css('span.comment').size
-    assert_equal 2, doc.css('em').size
-    assert_equal 1, doc.css('span.output').size
+    assert_equal 1, doc.css('ol').size
+    assert_equal 2, doc.css('li').size
+    assert_equal 2, doc.css('pre').size
 
-    assert_equal 0, doc.css('.command-line a').size
-    refute_equal 0, doc.css('pre').inner_text.length
+    list = doc.css('ol')[0]
+    first_list_item = doc.css('li')[0]
+    first_command_line_block = doc.css('pre')[0]
+    second_list_item = doc.css('li')[1]
+    second_command_line_block = doc.css('pre')[1]
+
+    assert list.children.include?(first_list_item)
+    assert list.children.include?(second_list_item)
+    assert_equal first_command_line_block.parent, first_list_item
+    assert_equal second_command_line_block.parent, second_list_item
   end
 
   def test_helper
