@@ -11,13 +11,13 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   def initialize(text, context = nil, result = nil)
     if context[:emf_use_blocks]
       text = self.class.convert_curly_to_bracket(text)
-      @front_wrap = "\\[\\["
-      @end_wrap = "\\]\\]"
-      @wrap_symbol = "\\]"
+      @front_wrap = '\\[\\['
+      @end_wrap = '\\]\\]'
+      @wrap_symbol = '\\]'
     else
       @front_wrap = "\{\{"
       @end_wrap = "\}\}"
-      @wrap_symbol = "}"
+      @wrap_symbol = '}'
     end
 
     # do preprocessing, then call HTML::Pipeline::Markdown
@@ -36,10 +36,10 @@ class ExtendedMarkdownFilter < HTML::Pipeline::MarkdownFilter
   end
 
   def self.should_jekyll_replace?(site)
-    html_pipeline_context = site.site_payload["site"]["html_pipeline"] && site.site_payload["site"]["html_pipeline"]["context"]
+    html_pipeline_context = site.site_payload['site']['html_pipeline'] && site.site_payload['site']['html_pipeline']['context']
     return false if html_pipeline_context.nil?
-    pipeline_emf_context = site.site_payload["site"]["html_pipeline"]["context"][:emf_use_blocks] || site.site_payload["site"]["html_pipeline"]["context"]["emf_use_blocks"]
-    site.site_payload["site"]["markdown"] == "HTMLPipeline" && html_pipeline_context && pipeline_emf_context
+    pipeline_emf_context = site.site_payload['site']['html_pipeline']['context'][:emf_use_blocks] || site.site_payload['site']['html_pipeline']['context']['emf_use_blocks']
+    site.site_payload['site']['markdown'] == 'HTMLPipeline' && html_pipeline_context && pipeline_emf_context
   end
 
   def call

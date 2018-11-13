@@ -5,4 +5,3 @@ module Filters
     end
   end
 end
-
