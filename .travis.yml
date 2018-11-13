@@ -1,9 +1,11 @@
 language: ruby
 rvm:
-  - 2.2.9
   - 2.3.6
   - 2.4.3
   - 2.5.0
+
+git:
+  depth: 10
 
 sudo: false
 
@@ -16,5 +18,8 @@ addons:
       - cmake
 
 cache: bundler
-git:
-  depth: 10
+
+matrix:
+  include:
+    - script: bundle exec rake rubocop
+      rvm: 2.5.0
