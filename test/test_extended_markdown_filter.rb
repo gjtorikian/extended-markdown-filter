@@ -55,8 +55,13 @@ class HTML::Pipeline::ExtendedMarkdownFilterTest < Minitest::Test
     assert_equal second_command_line_block.parent, second_list_item
   end
 
-  def test_helper
-    doc = ExtendedMarkdownFilter.to_document(fixture("helper.md"), {})
+  def test_helper_works_and_requires_unsafe
+    doc = ExtendedMarkdownFilter.to_document(fixture("helper.md"), { unsafe: false })
+    assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
+
+    assert_equal 0, doc.css('div.helper').size
+
+    doc = ExtendedMarkdownFilter.to_document(fixture("helper.md"), { unsafe: true })
     assert doc.kind_of?(HTML::Pipeline::DocumentFragment)
 
     assert_equal 1, doc.css('div.helper').size

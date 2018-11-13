@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'html-pipeline', "~> 2.0"
+  spec.add_dependency 'html-pipeline', "~> 2.9"
 
   spec.add_development_dependency "bundler", "~> 1.4"
   spec.add_development_dependency "rake"
